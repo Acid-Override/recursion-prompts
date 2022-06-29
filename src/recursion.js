@@ -766,8 +766,31 @@ var tagCount = function (tag, node) {
 // var array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
-var binarySearch = function (array, target, min, max) {
+var binarySearch = function (array, target, min = 0, max = array.length - 1) {
+
+  console.log(array, target, min, max)
+
+  let mid = Math.floor((max + min)/2)
+
+  if ( array[mid] === target ) {
+    return mid
+  }
+  if ( min >= max ) {
+    return null
+  }
+
+  if ( target > array[mid] ) {
+    return binarySearch(array, target, min = mid + 1, max)
+  } else {
+    return binarySearch(array, target, min, max = mid - 1)
+  }
+  return -1
+
 };
+
+array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+target = 5
+binarySearch(array, target)
 
 // 39. Write a merge sort function.
 // mergeSort([34,7,23,32,5,62]) // [5,7,23,32,34,62]
